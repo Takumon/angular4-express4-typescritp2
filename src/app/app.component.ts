@@ -1,10 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MessageService } from './message/message.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [ MessageService ]
 })
 export class AppComponent {
-  title = 'app';
+  messages: Array<any>;
+  message: string;
+
+  constructor(private messageService: MessageService) {
+    this.getMessages();
+  }
+
+  getMessages(): void {
+    this.messageService
+      .getAll()
+      .subscribe((res: any) => {
+        this.messages = res.messages;
+      });
+  }
+
+  registMessage(): void {
+    if (!this.message) {
+      return;
+    }
+
+    this.messageService
+      .regist(this.message)
+      .subscribe((res: any) => {
+        this.message = '';
+        this.getMessages();
+      });
+  }
 }
