@@ -29,7 +29,7 @@ export class AppComponent {
     }
 
     this.messageService
-      .regist(this.message)
+      .register(this.message)
       .subscribe((res: any) => {
         this.message = '';
         this.getMessages();
