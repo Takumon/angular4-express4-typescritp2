@@ -8,7 +8,7 @@ export class MessageService {
 
   constructor(private http: Http) {}
 
-  getAll(): Observable<Array<any>> {
+  getAll(): Observable<any> {
     return this.http
         .get('/api/messages')
         .map((response: Response) => {
