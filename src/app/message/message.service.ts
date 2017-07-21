@@ -18,7 +18,7 @@ export class MessageService {
         .catch((error: Response) => Observable.throw(error.json()));
   }
 
-  regist(message: string): Observable<any> {
+  register(message: string): Observable<any> {
     return this.http
       .post('/api/messages', {message: message})
       .map((response: Response) => {
