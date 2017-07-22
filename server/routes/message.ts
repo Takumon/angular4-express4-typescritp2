@@ -8,7 +8,10 @@ const messageRouter: Router = Router();
 messageRouter.get('/', (req, res, next) => {
   Message.find(function(err, doc) {
     if (err) {
-      return res.send('エラーが発生しました');
+      return res.status(500).json({
+          title: 'エラーが発生しました。',
+          error: err
+      });
     }
 
     return res.status(200).json({messages: doc});
