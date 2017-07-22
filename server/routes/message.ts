@@ -10,7 +10,7 @@ messageRouter.get('/', (req, res, next) => {
     if (err) {
       return res.status(500).json({
           title: 'エラーが発生しました。',
-          error: err
+          error: err.message
       });
     }
 
@@ -28,12 +28,12 @@ messageRouter.post('/', (req, res, next) => {
     if (err) {
       return res.status(500).json({
           title: 'エラーが発生しました。',
-          error: err
+          error: err.message
       });
     }
 
     return res.status(200).json({
-      message: 'Saved message',
+      message: 'メッセージを登録しました。',
       obj: result
     });
   });
