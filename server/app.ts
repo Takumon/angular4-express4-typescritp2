@@ -20,7 +20,9 @@ class App {
     this.express.use(bodyParser.urlencoded({ extended: false }));
     // 接続する MongoDB の設定
     mongoose.Promise = global.Promise;
-    mongoose.connect(process.env.MONGO_URL || MONGO_URL);
+    mongoose.connect(process.env.MONGO_URL || MONGO_URL, {
+      useMongoClient: true,
+    });
     process.on('SIGINT', function() { mongoose.disconnect(); });
   }
 
