@@ -15,7 +15,7 @@ export class MessageService {
             const result = response.json();
             return result;
         })
-        .catch((error: Response) => Observable.throw(error.json()));
+      .catch((error: Response) => Observable.throw(error.json()));
   }
 
   register(message: string): Observable<any> {
