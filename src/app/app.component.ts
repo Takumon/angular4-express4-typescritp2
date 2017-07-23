@@ -23,7 +23,7 @@ export class AppComponent {
       });
   }
 
-  registMessage(): void {
+  registerMessage(): void {
     if (!this.message) {
       return;
     }
