@@ -19,7 +19,7 @@
     "test": "run-p test:*",
     "test:client": "ng test",
     "test:server": "npm-run-all -s build:server_test -p watch:server_test  boot:server_test",
-    "e2e": "run-p webdriver:update webdriver:start protractor",
+    "e2e": "npm-run-all -s  webdriver:update -p webdriver:start protractor",
     "webdriver:update": "webdriver-manager update",
     "webdriver:start": "webdriver-manager start",
     "protractor": "protractor protractor.conf.js",
