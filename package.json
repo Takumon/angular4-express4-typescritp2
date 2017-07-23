@@ -8,14 +8,22 @@
     "start:client": "ng serve --aot=true --progress=false --proxy-config proxy.conf.json",
     "start:server": "run-p watch:server boot:server",
     "watch:server": "tsc -w -p ./server/tsconfig.server.json",
-    "boot:server": "nodemon ./dist/server/bin/www.js",
+    "watch:server_test": "tsc -w -p ./server_test/tsconfig.server_test.json",
+    "boot:server": "MONGO_URL=mongodb://localhost:27017/test nodemon ./dist/server/bin/www.js",
+    "boot:server_test": "MONGO_URL=mongodb://localhost:27018/test nodemon ./dist/server_test/test.server.js",
     "build": "run-s build:server build:client",
     "build:client": "ng build --output-path=./dist/server/public",
     "build:server": "tsc -p ./server/tsconfig.server.json",
+    "build:server_test": "tsc -p ./server/tsconfig.server.json",
     "buildRun": "run-s build boot:server",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "test": "run-p test:*",
+    "test:client": "ng test",
+    "test:server": "npm-run-all -s build:server_test -p watch:server_test  boot:server_test",
+    "e2e": "run-p webdriver:update webdriver:start protractor",
+    "webdriver:update": "webdriver-manager update",
+    "webdriver:start": "webdriver-manager start",
+    "protractor": "protractor protractor.conf.js",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +41,7 @@
     "express": "^4.15.3",
     "mongoose": "^4.11.3",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.12"
   },
   "devDependencies": {
     "@angular/cli": "1.2.1",
@@ -54,6 +62,7 @@
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "protractor": "~5.1.2",
+    "supertest": "^3.0.0",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
     "typescript": "~2.3.3"
